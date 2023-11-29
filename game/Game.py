@@ -39,44 +39,36 @@ class Game:
         b = self.board
 
         # up from last played coin
-        if c + 3 < number_of_cols:
-            if b[c][r] == b[c+1][r] == b[c+2][r] == b[c+3][r]:
-                return True
+        if c + 3 < number_of_cols and (b[c][r] == b[c+1][r] == b[c+2][r] == b[c+3][r]):
+            return True
 
         # down from last played coin
-        if c - 3 >= 0:
-            if b[c][r] == b[c-1][r] == b[c-2][r] == b[c-3][r]:
-                return True
+        if c - 3 >= 0 and (b[c][r] == b[c-1][r] == b[c-2][r] == b[c-3][r]):
+            return True
 
         # right from last played coin
-        if r + 3 < number_of_rows:
-            if b[c][r] == b[c][r+1] == b[c][r+2] == b[c][r+3]:
-                return True
+        if r + 3 < number_of_rows and (b[c][r] == b[c][r+1] == b[c][r+2] == b[c][r+3]):
+            return True
 
         # left from last played coin
-        if r - 3 >= 0:
-            if b[c][r] == b[c][r-1] == b[c][r-2] == b[c][r-3]:
-                return True
+        if r - 3 >= 0 and (b[c][r] == b[c][r-1] == b[c][r-2] == b[c][r-3]):
+            return True
 
         # top-right from last played coin
-        if c + 3 < number_of_cols and r + 3 < number_of_rows:
-            if b[c][r] == b[c+1][r+1] == b[c+2][r+2] == b[c+3][r+3]:
-                return True
+        if c + 3 < number_of_cols and r + 3 < number_of_rows and (b[c][r] == b[c+1][r+1] == b[c+2][r+2] == b[c+3][r+3]):
+            return True
 
         # bottom-right from last played coin
-        if c + 3 < number_of_cols and r - 3 >= 0:
-            if b[c][r] == b[c+1][r-1] == b[c+2][r-2] == b[c+3][r-3]:
-                return True
+        if c + 3 < number_of_cols and r - 3 >= 0 and (b[c][r] == b[c+1][r-1] == b[c+2][r-2] == b[c+3][r-3]):
+            return True
 
         # top-left from last played coin
-        if c - 3 >= 0 and r + 3 < number_of_rows:
-            if b[c][r] == b[c-1][r+1] == b[c-2][r+2] == b[c-3][r+3]:
-                return True
+        if c - 3 >= 0 and r + 3 < number_of_rows and (b[c][r] == b[c-1][r+1] == b[c-2][r+2] == b[c-3][r+3]):
+            return True
 
         # bottom-left from last played coin
-        if c - 3 >= 0 and r - 3 >= 0:
-            if b[c][r] == b[c-1][r-1] == b[c-2][r-2] == b[c-3][r-3]:
-                return True
+        if c - 3 >= 0 and r - 3 >= 0 and (b[c][r] == b[c-1][r-1] == b[c-2][r-2] == b[c-3][r-3]):
+            return True
 
         return False
 
