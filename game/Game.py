@@ -21,42 +21,24 @@ class Game:
         c = last_played_pos[0]
         r = last_played_pos[1]
         b = self.board
+        won = False
 
-        # does not work yet for instances where last played coin in not in at the end of the 4
+        possible_offsets = [
+            [[1, 0], [2, 0], [3, 0]],
+            [[-1, 0], [-2, 0], [-3, 0]],
+            [[0, 1], [0, 2], [0, 3]],
+            [[0, -1], [0, -2], [0, -3]],
+            [[1, 1], [2, 2], [3, 3]],
+            [[1, -1], [2, -2], [3, -3]],
+            [[-1, 1], [-2, 2], [-3, 3]],
+            [[-1, -1], [-2, -2], [-3, -3]],
+        ]
 
-        # up from last played coin
-        if b.get(c, r) == b.get(c+1, r) == b.get(c+2, r) == b.get(c+3, r):
-            return True
+        for offset in possible_offsets:
+            won = won or b.get(c, r) == b.get(c+offset[0][0], r+offset[0][1]) == b.get(
+                c+offset[1][0], r+offset[1][1]) == b.get(c+offset[2][0], r+offset[2][1])
 
-        # down from last played coin
-        if b.get(c, r) == b.get(c-1, r) == b.get(c-2, r) == b.get(c-3, r):
-            return True
-
-        # right from last played coin
-        if b.get(c, r) == b.get(c, r+1) == b.get(c, r+2) == b.get(c, r+3):
-            return True
-
-        # left from last played coin
-        if b.get(c, r) == b.get(c, r-1) == b.get(c, r-2) == b.get(c, r-3):
-            return True
-
-        # top-right from last played coin
-        if b.get(c, r) == b.get(c+1, r+1) == b.get(c+2, r+2) == b.get(c+3, r+3):
-            return True
-
-        # bottom-right from last played coin
-        if b.get(c, r) == b.get(c+1, r-1) == b.get(c+2, r-2) == b.get(c+3, r-3):
-            return True
-
-        # top-left from last played coin
-        if b.get(c, r) == b.get(c-1, r+1) == b.get(c-2, r+2) == b.get(c-3, r+3):
-            return True
-
-        # bottom-left from last played coin
-        if b.get(c, r) == b.get(c-1, r-1) == b.get(c-2, r-2) == b.get(c-3, r-3):
-            return True
-
-        return False
+        return won
 
     def current_player(self):
         return self.player_a if self.player_a_turn else self.player_b
