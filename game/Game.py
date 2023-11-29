@@ -38,6 +38,8 @@ class Game:
         r = last_played_pos[1]
         b = self.board
 
+        # does not work yet for instances where last played coin in not in at the end of the 4
+
         # up from last played coin
         if c + 3 < number_of_cols and (b[c][r] == b[c+1][r] == b[c+2][r] == b[c+3][r]):
             return True
