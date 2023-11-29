@@ -16,11 +16,12 @@ class Game:
         self.player_b = player_b
         self.player_a_turn = True
 
+    # Gayatri im writing the other way
     def _check_win(self, last_played_pos):
         possible_offsets = [
             [[1, 0], [2, 0], [3, 0]],
+            [[-1, 0], [1, 0], [2, 0]],
             [[0, 1], [0, 2], [0, 3]],
-            [[0, 1], [0, -1], [0, -2]],
             [[1, 1], [2, 2], [3, 3]],
             [[-1, -1], [1, 1], [2, 2]],
             [[-2, -2], [-1, -1], [1, 1]],
@@ -32,16 +33,15 @@ class Game:
         c = last_played_pos[0]
         r = last_played_pos[1]
         b = self.board
-        won = False
 
         for offset in possible_offsets:
-            won = won or b.get(c, r) == b.get(c+offset[0][0], r+offset[0][1]) == b.get(
-                c+offset[1][0], r+offset[1][1]) == b.get(c+offset[2][0], r+offset[2][1])
+            if b.get(c, r) == b.get(c+offset[0][0], r+offset[0][1]) == b.get(c+offset[1][0], r+offset[1][1]) == b.get(c+offset[2][0], r+offset[2][1]):
+                return True
 
-            won = won or b.get(c, r) == b.get(c-offset[0][0], r-offset[0][1]) == b.get(
-                c-offset[1][0], r-offset[1][1]) == b.get(c-offset[2][0], r-offset[2][1])
+            if b.get(c, r) == b.get(c-offset[0][0], r-offset[0][1]) == b.get(c-offset[1][0], r-offset[1][1]) == b.get(c-offset[2][0], r-offset[2][1]):
+                return True
 
-        return won
+        return False
 
     def current_player(self):
         return self.player_a if self.player_a_turn else self.player_b
