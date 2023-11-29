@@ -39,23 +39,31 @@ class Game:
         r = last_played_pos[1]
         b = self.board
         for _ in range(4):
+            # up from last played coin
             if c + 3 < number_of_cols:
                 won = won or b[c][r] == b[c+1][r] == b[c+2][r] == b[c+3][r]
+            # down from last played coin
             if c - 3 >= 0:
                 won = won or b[c][r] == b[c-1][r] == b[c-2][r] == b[c-3][r]
+            # right from last played coin
             if r + 3 < number_of_rows:
                 won = won or b[c][r] == b[c][r+1] == b[c][r+2] == b[c][r+3]
+            # left from last played coin
             if r - 3 >= 0:
                 won = won or b[c][r] == b[c][r-1] == b[c][r-2] == b[c][r-3]
+            # top-right from last played coin
             if c + 3 < number_of_cols and r + 3 < number_of_rows:
                 won = won or b[c][r] == b[c+1][r +
                                                1] == b[c+2][r+2] == b[c+3][r+3]
+            # bottom-right from last played coin
             if c + 3 < number_of_cols and r - 3 >= 0:
                 won = won or b[c][r] == b[c+1][r -
                                                1] == b[c+2][r-2] == b[c+3][r-3]
+            # top-left from last played coin
             if c - 3 >= 0 and r + 3 < number_of_rows:
                 won = won or b[c][r] == b[c-1][r +
                                                1] == b[c-2][r+2] == b[c-3][r+3]
+            # bottom-left from last played coin
             if c - 3 >= 0 and r - 3 >= 0:
                 won = won or b[c][r] == b[c-1][r -
                                                1] == b[c-2][r-2] == b[c-3][r-3]
