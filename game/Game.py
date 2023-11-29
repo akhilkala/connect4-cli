@@ -16,14 +16,7 @@ class Game:
         self.player_b = player_b
         self.player_a_turn = True
 
-    # Gayatri im writing the other way
     def _check_win(self, last_played_pos):
-        c = last_played_pos[0]
-        r = last_played_pos[1]
-        b = self.board
-        won = False
-
-        # use loops dumb
         possible_offsets = [
             [[1, 0], [2, 0], [3, 0]],
             [[0, 1], [0, 2], [0, 3]],
@@ -35,6 +28,11 @@ class Game:
             [[-1, 1], [1, -1], [2, -2]],
             [[-2, 2], [-1, 1], [1, -1]],
         ]
+
+        c = last_played_pos[0]
+        r = last_played_pos[1]
+        b = self.board
+        won = False
 
         for offset in possible_offsets:
             won = won or b.get(c, r) == b.get(c+offset[0][0], r+offset[0][1]) == b.get(
