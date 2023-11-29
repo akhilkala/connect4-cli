@@ -33,41 +33,52 @@ class Game:
     def _check_win(self, last_played_pos):
         number_of_cols = len(self.board)
         number_of_rows = len(self.board[0])
-        won = False
 
         c = last_played_pos[0]
         r = last_played_pos[1]
         b = self.board
-        for _ in range(4):
-            # up from last played coin
-            if c + 3 < number_of_cols:
-                won = won or b[c][r] == b[c+1][r] == b[c+2][r] == b[c+3][r]
-            # down from last played coin
-            if c - 3 >= 0:
-                won = won or b[c][r] == b[c-1][r] == b[c-2][r] == b[c-3][r]
-            # right from last played coin
-            if r + 3 < number_of_rows:
-                won = won or b[c][r] == b[c][r+1] == b[c][r+2] == b[c][r+3]
-            # left from last played coin
-            if r - 3 >= 0:
-                won = won or b[c][r] == b[c][r-1] == b[c][r-2] == b[c][r-3]
-            # top-right from last played coin
-            if c + 3 < number_of_cols and r + 3 < number_of_rows:
-                won = won or b[c][r] == b[c+1][r +
-                                               1] == b[c+2][r+2] == b[c+3][r+3]
-            # bottom-right from last played coin
-            if c + 3 < number_of_cols and r - 3 >= 0:
-                won = won or b[c][r] == b[c+1][r -
-                                               1] == b[c+2][r-2] == b[c+3][r-3]
-            # top-left from last played coin
-            if c - 3 >= 0 and r + 3 < number_of_rows:
-                won = won or b[c][r] == b[c-1][r +
-                                               1] == b[c-2][r+2] == b[c-3][r+3]
-            # bottom-left from last played coin
-            if c - 3 >= 0 and r - 3 >= 0:
-                won = won or b[c][r] == b[c-1][r -
-                                               1] == b[c-2][r-2] == b[c-3][r-3]
-        return won
+
+        # up from last played coin
+        if c + 3 < number_of_cols:
+            if b[c][r] == b[c+1][r] == b[c+2][r] == b[c+3][r]:
+                return True
+
+        # down from last played coin
+        if c - 3 >= 0:
+            if b[c][r] == b[c-1][r] == b[c-2][r] == b[c-3][r]:
+                return True
+
+        # right from last played coin
+        if r + 3 < number_of_rows:
+            if b[c][r] == b[c][r+1] == b[c][r+2] == b[c][r+3]:
+                return True
+
+        # left from last played coin
+        if r - 3 >= 0:
+            if b[c][r] == b[c][r-1] == b[c][r-2] == b[c][r-3]:
+                return True
+
+        # top-right from last played coin
+        if c + 3 < number_of_cols and r + 3 < number_of_rows:
+            if b[c][r] == b[c+1][r+1] == b[c+2][r+2] == b[c+3][r+3]:
+                return True
+
+        # bottom-right from last played coin
+        if c + 3 < number_of_cols and r - 3 >= 0:
+            if b[c][r] == b[c+1][r-1] == b[c+2][r-2] == b[c+3][r-3]:
+                return True
+
+        # top-left from last played coin
+        if c - 3 >= 0 and r + 3 < number_of_rows:
+            if b[c][r] == b[c-1][r+1] == b[c-2][r+2] == b[c-3][r+3]:
+                return True
+
+        # bottom-left from last played coin
+        if c - 3 >= 0 and r - 3 >= 0:
+            if b[c][r] == b[c-1][r-1] == b[c-2][r-2] == b[c-3][r-3]:
+                return True
+
+        return False
 
     def current_player(self):
         return self.player_a if self.player_a_turn else self.player_b
