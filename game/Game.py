@@ -29,48 +29,37 @@ class Game:
             board.append(col)
         return board
 
-    def _check_win(self, player):
-        symbol = player.symbol
-        win = False
+    # Gayatri im writing the other way
+    def _check_win(self, last_played_pos):
+        number_of_cols = len(self.board)
+        number_of_rows = len(self.board[0])
+        won = False
 
-        # vertical checker
-        print("vertical check", win)
-        for row in range(5):
-            for col in range(4):
-                print(row, col)
-                print(self.board[1][0])
-                print(self.board[1][1])
-                print(self.board[1][2])
-                print(self.board[1][4])
-                if self.board[row][col] == symbol:
-                    win = win or self.board[row][col] == self.board[row][col +
-                                                                         1] == self.board[row][col+2] == self.board[col+3]
-
-        # horizontal checker
-        print("horizontal check", win)
-        for row in range(6):
-            for col in range(4):
-                if self.board[row][col] == symbol:
-                    win = win or self.board[row][col] == self.board[row +
-                                                                    1][col] == self.board[row+2][col] == self.board[row+3][col]
-
-        print("positive diagonal check", win)
-        # positive diagonal checker
-        for row in range(4):
-            for col in range(4):
-                if self.board[row][col] == symbol:
-                    win = win or self.board[row][col] == self.board[row+1][col +
-                                                                           1] == self.board[row+2][col+2] == self.board[row+3][col+3]
-
-        print("negative diagonal check", win)
-        # negative diagonal checker
-        for row in range(4):
-            for col in range(4):
-                if self.board[row][col] == symbol:
-                    win = win or self.board[row][col] == self.board[row+1][col -
-                                                                           1] == self.board[row+2][col-2] == self.board[row+3][col-3]
-
-        return win
+        c = last_played_pos[0]
+        r = last_played_pos[1]
+        b = self.board
+        for _ in range(4):
+            if c + 3 < number_of_cols:
+                won = won or b[c][r] == b[c+1][r] == b[c+2][r] == b[c+3][r]
+            if c - 3 >= 0:
+                won = won or b[c][r] == b[c-1][r] == b[c-2][r] == b[c-3][r]
+            if r + 3 < number_of_rows:
+                won = won or b[c][r] == b[c][r+1] == b[c][r+2] == b[c][r+3]
+            if r - 3 >= 0:
+                won = won or b[c][r] == b[c][r-1] == b[c][r-2] == b[c][r-3]
+            if c + 3 < number_of_cols and r + 3 < number_of_rows:
+                won = won or b[c][r] == b[c+1][r +
+                                               1] == b[c+2][r+2] == b[c+3][r+3]
+            if c + 3 < number_of_cols and r - 3 >= 0:
+                won = won or b[c][r] == b[c+1][r -
+                                               1] == b[c+2][r-2] == b[c+3][r-3]
+            if c - 3 >= 0 and r + 3 < number_of_rows:
+                won = won or b[c][r] == b[c-1][r +
+                                               1] == b[c-2][r+2] == b[c-3][r+3]
+            if c - 3 >= 0 and r - 3 >= 0:
+                won = won or b[c][r] == b[c-1][r -
+                                               1] == b[c-2][r-2] == b[c-3][r-3]
+        return won
 
     def current_player(self):
         return self.player_a if self.player_a_turn else self.player_b
@@ -88,11 +77,13 @@ class Game:
         if columnIndex not in self.available_columns():
             return
 
+        rowIndex = -1
         for i, element in enumerate(self.board[columnIndex]):
             if element == Game._EMPTY_SYMBOL:
                 self.board[columnIndex][i] = player.symbol
+                rowIndex = i
                 break
-        win = self._check_win(player)
+        win = self._check_win([columnIndex, rowIndex])
         self.player_a_turn = not self.player_a_turn
         return win
 
