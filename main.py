@@ -7,17 +7,7 @@ playerB = Player("B")
 
 game = Game(BOARD_SIZE, playerA, playerB)
 
-# diagnol
-# game.play(0, playerA)
-# game.play(1, playerA)
-# game.play(1, playerA)
-# game.play(2, playerB)
-# game.play(2, playerB)
-# game.play(2, playerA)
-# game.play(3, playerB)
-# game.play(3, playerB)
-# game.play(3, playerB)
-# win = game.play(3, playerA)
+# when winning move is at the end
 
 # vertical
 # game.play(0, playerA)
@@ -30,6 +20,38 @@ game = Game(BOARD_SIZE, playerA, playerB)
 # game.play(1, playerA)
 # game.play(2, playerA)
 # win = game.play(3, playerA)
+
+# diagnol
+# game.play(0, playerA)
+# game.play(1, playerA)
+# game.play(1, playerA)
+# game.play(2, playerB)
+# game.play(2, playerB)
+# game.play(2, playerA)
+# game.play(3, playerB)
+# game.play(3, playerB)
+# game.play(3, playerB)
+# win = game.play(3, playerA)
+
+# when winning move is in the middle
+
+# horizontal
+# game.play(0, playerA)
+# game.play(2, playerA)
+# game.play(3, playerA)
+# win = game.play(1, playerA)
+
+# diagnol
+# game.play(0, playerA)
+# game.play(1, playerA)
+# game.play(3, playerA)
+# game.play(2, playerB)
+# game.play(2, playerB)
+# game.play(1, playerA)
+# game.play(3, playerB)
+# game.play(3, playerB)
+# game.play(3, playerA)
+# win = game.play(2, playerA)
 
 game.print()
 print(win)
