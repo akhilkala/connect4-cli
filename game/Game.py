@@ -1,12 +1,12 @@
 from game.Board import Board
 
-#  0  1  2  3  4  5  6
-# [ ][ ][ ][ ][ ][ ][ ]
-# [ ][ ][ ][ ][ ][ ][ ]
-# [ ][ ][ ][ ][ ][ ][ ]
-# [ ][ ][ ][ ][ ][ ][ ]
-# [ ][ ][ ][ ][ ][ ][ ]
-# [ ][ ][ ][ ][ ][ ][ ]
+#    0  1  2  3  4  5  6
+# 0 [ ][ ][ ][ ][ ][ ][ ]
+# 1 [ ][ ][ ][ ][ ][ ][ ]
+# 2 [ ][ ][ ][ ][ ][ ][ ]
+# 3 [ ][ ][ ][ ][ ][ ][ ]
+# 4 [ ][ ][ ][ ][ ][ ][ ]
+# 5 [ ][ ][ ][ ][ ][ ][ ]
 
 
 class Game:
@@ -16,7 +16,6 @@ class Game:
         self.player_b = player_b
         self.player_a_turn = True
 
-    # Gayatri im writing the other way
     def _check_win(self, last_played_pos):
         possible_offsets = [
             [[1, 0], [2, 0], [3, 0]],
@@ -43,10 +42,11 @@ class Game:
 
         return False
 
-    def current_player(self):
+    def get_current_player(self):
         return self.player_a if self.player_a_turn else self.player_b
 
-    def play(self, columnIndex, player):
+    def play(self, columnIndex):
+        player = self.get_current_player()
         if columnIndex not in self.board.available_columns():
             return
 
